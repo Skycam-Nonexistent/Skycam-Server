@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.arkconcepts.cameraserve"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -23,7 +23,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
     testCompile 'junit:junit:4.12'
+
     compile 'com.android.support:appcompat-v7:26.0.2'
     compile 'com.android.support:design:26.0.2'
     compile 'com.android.support:support-v4:26.0.2'
