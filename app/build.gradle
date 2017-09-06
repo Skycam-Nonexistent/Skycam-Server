@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.arkconcepts.cameraserve"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"

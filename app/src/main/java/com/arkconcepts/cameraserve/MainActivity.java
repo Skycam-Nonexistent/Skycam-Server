@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
         cacheResolutions();
 
-        FloatingActionButton flipButton = (FloatingActionButton) findViewById(R.id.flipButton);
+        FloatingActionButton flipButton = findViewById(R.id.flipButton);
         flipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
-        FloatingActionButton settingsButton = (FloatingActionButton) findViewById(R.id.settingsButton);
+        FloatingActionButton settingsButton = findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         });
 
-        SurfaceView cameraView = (SurfaceView) findViewById(R.id.surfaceView);
+        SurfaceView cameraView = findViewById(R.id.surfaceView);
         holder = cameraView.getHolder();
         holder.addCallback(this);
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
