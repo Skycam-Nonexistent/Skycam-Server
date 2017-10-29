@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<title></title>
+	<style type="text/css">
+		.h1, .h2 {
+			text-align: center;
+			margin: 20px 0;
+		}
+		.list {
+
+		}
+		.list .item {
+			margin: 10px;
+		}
+		.list .item img {
+			width: 100px;
+			height: 100px;
+		}
+		.list .item select {
+			margin-left: 20px;
+		}
+		.list .item button {
+			margin-left: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="h1">反馈学习</div>
+	<div class="h2"></div>
+	<div class="list">
+	</div>
+<!-- 	<script type="text/javascript">
+		//mock数据：debug用 
+		var Android = {
+			data: function() {
+				return "/storage/emulated/0/FaceRecognizeSystem/result/2017/5/20/罗镇宗_男_1495241189645.jpg|/storage/emulated/0/FaceRecognizeSystem/result/2017/5/20/王潇_女_1495241189645.jpg";
+			},
+			title: function() {
+				return "今日统计";
+			},
+			names: function() {
+				return "王潇|罗镇宗";
+			},
+			correct: function(name, gender, face) {
+				console.log(name, gender, face);
+			}
+		}
+	</script> -->
+	<script type="text/javascript">
+		//调用Java接口，由数据生成界面
+		document.querySelector('.h2').innerText = Android.title();
+		var faces = Android.data().split('|');
+		var names = Android.names().split('|');
+		var namesSelect = "<select class='name'>";
+		names.forEach(function(name) {
+			namesSelect += "<option value='" + name + "'>" + name + "</option>";
+		})
+		namesSelect += "</select>";
+		var facesList = "";
+		faces.forEach(function(face){
+			facesList += generateListItem(face);
+		})
+		document.querySelector('.list').innerHTML = facesList;
+
+		function generateListItem(face) {
+			var url = face;
+			var gender = face.split("_")[1];
+			var info = face.split("/");
+			var name = info[info.length - 1].split("_")[0];
+			var item = "<div class='item'>" +
+					   		"<img src='" + url + "'/>" +
+							namesSelect + 
+							"<select class='gender'>" +
+								"<option value='男'>男</option>" +
+								"<option value='女'>女</option>" +
+							"</select>" +
+							"<button>纠正</button>" +
+						"</div>";
+			//设置目前的性别
+			var key = "value='" + gender + "'";
+			item = item.replace(key, key + " selected = 'selected'");
+			//设置目前名字
+			key = "value='" + name + "'";
+			item = item.replace(key, key + " selected = 'selected'");
+			return item;
+		}
+
+		//事件绑定：纠正按钮
+		document.querySelector('.list').addEventListener('click', function(e){
+			var target = e.target;
+			if (target.tagName == "BUTTON") {
+				var item = target.parentElement;
+				var face = item.querySelector('img').src;
+				var gender = item.querySelector('.gender').value;
+				var name = item.querySelector('.name').value;
+				Android.correct(name, gender, decodeURIComponent(face));
+				item.remove();
+				//alert("纠正完成");
+			}
+		}, false)
+	</script>
+</body>
+</html>
